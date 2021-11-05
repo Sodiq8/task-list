@@ -1,6 +1,8 @@
+//selectors
 const inputVal = document.getElementsByClassName("inputVal")[0];
 const addTaskBtn = document.getElementsByClassName("btn")[0];
 
+//Event listeners and Function
 addTaskBtn.addEventListener("click", function () {
   if (inputVal.value.trim() != 0) {
     let localItems = JSON.parse(localStorage.getItem("localItem"));
@@ -16,7 +18,6 @@ addTaskBtn.addEventListener("click", function () {
 
   showlist();
 });
-
 function showlist() {
   let outPut = "";
   let taskListShow = document.querySelector(".todoListItem");
@@ -27,6 +28,7 @@ function showlist() {
     taskList = localItems;
   }
 
+  //todoList div created with JS
   taskList.forEach((data, index) => {
     outPut += `
     <div class="todoList">
@@ -38,6 +40,7 @@ function showlist() {
 }
 showlist();
 
+//Delete Todo Function
 function deleteItem(index) {
   let localItems = JSON.parse(localStorage.getItem("localItem"));
   taskList.splice(index, 1);
@@ -45,6 +48,7 @@ function deleteItem(index) {
   showlist();
 }
 
+//Clear all task Function
 function clearTask() {
   localStorage.clear();
   showlist();
