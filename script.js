@@ -4,14 +4,19 @@ const addTaskBtn = document.getElementsByClassName("btn")[0];
 
 //Event listeners and Function
 addTaskBtn.addEventListener("click", function () {
-  if (inputVal.value.trim() != 0) {
+  const task = inputVal.value;
+  if (!task) {
+    alert("Please fill out the todo Task");
+    return;
+  }
+  if (task.trim()) {
     let localItems = JSON.parse(localStorage.getItem("localItem"));
-    if (localItems === null) {
+    if (!localItems === null) {
       taskList = [];
     } else {
       taskList = localItems;
     }
-    taskList.push(inputVal.value);
+    taskList.push(task);
     localStorage.setItem("localItem", JSON.stringify(taskList));
     inputVal.value = "";
   }
@@ -32,7 +37,7 @@ function showlist() {
   taskList.forEach((data, index) => {
     outPut += `
     <div class="todoList">
-    <p class="pText">${data} <button class="deleteTask" onClick="deleteItem(${index})">delete</button></p> 
+    <p class="pText">${data} <button class="deleteTask" onClick="deleteItem(${index})">X</button></p> 
     </div>
     `;
   });
